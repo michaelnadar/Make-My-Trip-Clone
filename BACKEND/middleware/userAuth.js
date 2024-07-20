@@ -14,7 +14,7 @@ function userAuth(req, res, next) {
 
         const decoded = jwt.verify(removeBerer[1], config.jwtSecret);
       
-        if (decoded.user.role==='user') {
+        if (decoded.user.role==='user' || decoded.user.role === 'admin') {
            req.user = decoded;
             next();
         } else {

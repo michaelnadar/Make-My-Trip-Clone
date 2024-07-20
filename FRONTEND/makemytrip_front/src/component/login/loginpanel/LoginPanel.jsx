@@ -110,9 +110,6 @@ export const LoginPanel = ({ handleClick, handleUser }) => {
   <Style>
       <div className="loginMain">
       <div className="login-wrap">
-        <div className="close">
-          <span onClick={handleClick}>X</span>
-        </div>
         {
           (Auth.isAuthenticated()&& isUserExist ) ?handleNewUser(findUser):
         

@@ -3,6 +3,8 @@ import './Bookingform.css';
 import axios from 'axios';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
+
 
 const HotelBookingForm = (props) => {
     const [numRooms, setNumRooms] = useState(0);
@@ -33,7 +35,10 @@ const HotelBookingForm = (props) => {
     const handleSubmit = async (e) => {
         var currentdate = getCurrentDate();
         e.preventDefault();
+        const decoded = jwtDecode(token);
+        console.log(decoded.user.id);
         const payload = {
+            userid:decoded.user.id,
             hotelId: props._id,
             customerName: localStorage.getItem("username"),
             customerEmail: emailRef.current.value,
@@ -50,8 +55,8 @@ const HotelBookingForm = (props) => {
                     'Authorization': `Bearer ${token}`, // Include the bearer token in the headers
                 },
             });
-            alert('Hotel booked successfully!');
-            navigate('/');
+            
+            navigate('/booking');
         } catch (error) {
             console.error('Error booking hotel:', error);
             alert('Failed to book hotel. Please try again.');

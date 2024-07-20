@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { useState,useEffect,useContext } from 'react';
 import { Header } from '../SearchPage/Header';
 import { Bottom } from '../HomePage/Bottom';
@@ -20,7 +20,7 @@ const Style = styled.div`
   `
 
   const Booking = () => {
-
+    const navigate = useNavigate();
     const token = localStorage.getItem('token'); 
     const [Flight,SetFlight]=useState({
         // "isDelete": false,
@@ -45,7 +45,16 @@ const Style = styled.div`
         // "__v": 0
     });
 
-    
+    useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      //navigate("/")
+     
+        const popup = document.getElementById("popup");
+        popup.classList.add("active");
+
+     
+    }
+  },[])
 
     const {Id} = useParams();
     const {apiBaseUrl}=useContext(Statecontext);

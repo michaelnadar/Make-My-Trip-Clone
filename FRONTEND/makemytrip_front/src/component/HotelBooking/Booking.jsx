@@ -24,6 +24,16 @@ const Booking = () => {
     const { Id } = useParams();
     const { apiBaseUrl } = useContext(Statecontext);
 
+    useEffect(()=>{
+      if(!localStorage.getItem('token')){
+        //navigate("/")
+       
+          const popup = document.getElementById("popup");
+          popup.classList.add("active");
+  
+       
+      }
+    },[])
     useEffect(() => {
       const fetchHotel = async () => {
         const url = `${apiBaseUrl}admin/hotels/${Id}`;

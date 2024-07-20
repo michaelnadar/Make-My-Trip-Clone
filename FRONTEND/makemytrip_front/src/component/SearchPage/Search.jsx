@@ -18,7 +18,7 @@ export const Search = () => {
    setReturnDate(select.ReturnDate)
    setTravellerClass(select.TravellerClass)
   };
-
+  
   useEffect(()=>{
     fetchData();
   },[from,to,departureDate,returnDate,travellerClass])

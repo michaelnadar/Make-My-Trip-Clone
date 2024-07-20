@@ -33,7 +33,7 @@ console.log(user);
             }
         };
 
-        jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(payload, config.jwtSecret, { expiresIn: '3d' }, (err, token) => {
             if (err) throw err;
             res.json({ token });
         });
@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
             }
         };
 
-        jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(payload, config.jwtSecret, { expiresIn: '3d' }, (err, token) => {
             if (err) throw err;
             res.json({ token });
         });

@@ -28,6 +28,7 @@ const AddFlightForm = () => {
     airportCode: '',
     airportName: '',
     class: '',
+    slot:'',
     isDelete:false
   });
 
@@ -249,6 +250,17 @@ const AddFlightForm = () => {
               placeholder="Enter Airport Name"
               name="airportName"
               value={flight.airportName}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
+               <Form.Group controlId="formAirportName" class="col-md-4">
+            <Form.Label>Seats</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Available Seat"
+              name="slot"
+              value={flight.slot}
               onChange={handleChange}
               required
               />

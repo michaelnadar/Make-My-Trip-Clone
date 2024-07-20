@@ -29,6 +29,7 @@ const UpdateFlightForm = () => {
     airportCode: '',
     airportName: '',
     class: '',
+    slot:'',
     isDelete: false
   });
 
@@ -251,6 +252,18 @@ const UpdateFlightForm = () => {
                   required
                 />
               </Form.Group>
+              <Form.Group controlId="formAirportName" class="col-md-4">
+
+            <Form.Label>Seats</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Available Seat"
+              name="slot"
+              value={flight.slot}
+              onChange={handleChange}
+              required
+              />
+               </Form.Group>
 
               <Form.Group controlId="formClass" className="col-md-6">
                 <Form.Label>Class</Form.Label>

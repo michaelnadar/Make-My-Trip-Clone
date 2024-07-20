@@ -4,6 +4,8 @@ import './FlightBooking.css';
 import axios from 'axios';
 import Statecontext from '../Context/Statecontext';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
+
 const BookingForm = (props) => {
     const [numPassengers, setNumPassengers] = useState(0);
     const [amount, setAmount] = useState(props.price);
@@ -14,6 +16,8 @@ const BookingForm = (props) => {
     const {apiBaseUrl}=useContext(Statecontext);
     const navigate = useNavigate(); 
     useEffect(() => {
+    
+        
         // Initialize passenger details based on the number of passengers
         const initialPassengerDetails = Array.from({ length: numPassengers }, (_, index) => ({
             name: '',
@@ -26,7 +30,7 @@ const BookingForm = (props) => {
 
     const handlePassengersChange = (e) => {
         const newNumPassengers = parseInt(e.target.value, 10) || 0;
-        setNumPassengers(newNumPassengers);
+        setNumPassengers(newNumPassengers); 
         setAmount(newNumPassengers * props.price);
         setTotalAmount(newNumPassengers * props.price*1.18)
     };
@@ -52,14 +56,21 @@ const BookingForm = (props) => {
     const handleSubmit = async (e) => {
         var currentdate = getCurrentDate();
         e.preventDefault();
+        
+              const decoded = jwtDecode(token);
+              console.log(decoded.user.id);
+
+              // decoded contains the decoded JWT payload
+           
         const payload = {
             flightId: props._id,
-            passengerName:localStorage.getItem("username"),
+          //  passengerName:localStorage.getItem("username"),
             passengerEmail: emailRef.current.value,
             numberOfTickets: numPassengers,
             bookingDate: currentdate,
             totalPrice: totalAmount,
-            // passengerDetails,
+            passengerDetails, 
+            userid:decoded.user.id
         };
 
         console.log(payload, "payload");
@@ -70,8 +81,8 @@ const BookingForm = (props) => {
                     'Authorization': `Bearer ${token}`, // Include the bearer token in the headers
                 },
             });
-            alert('Flight booked successfully!');
-            navigate('/');
+            
+            navigate('/booking');
         } catch (error) {
             console.error('Error booking flight:', error);
             alert('Failed to book flight. Please try again.');
